@@ -984,7 +984,7 @@ public:
         return true;
     }
 
-    bool CanPacketReceive(WorldSession* session, WorldPacket& packet) override
+    bool CanPacketReceive(WorldSession* session, WorldPacket const& packet) override
     {
         if (!sALE->OnPacketReceive(session, packet))
             return false;

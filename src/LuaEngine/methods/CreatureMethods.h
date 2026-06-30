@@ -649,7 +649,7 @@ namespace LuaCreature
         float dist = ALE::CHECKVAL<float>(L, 5, 0.0f);
         int32 aura = ALE::CHECKVAL<int32>(L, 6, 0);
 
-        auto const& threatlist = creature->GetThreatMgr().GetThreatList();
+        auto threatlist = creature->GetThreatMgr().GetModifiableThreatList();
 
         if (threatlist.empty())
             return 1;
@@ -660,7 +660,7 @@ namespace LuaCreature
 
         for (auto itr = threatlist.begin(); itr != threatlist.end(); ++itr)
         {
-            Unit* target = (*itr)->getTarget();
+            Unit* target = (*itr)->GetVictim();
 
             if (!target)
                 continue;
@@ -730,14 +730,14 @@ namespace LuaCreature
      */
     int GetAITargets(lua_State* L, Creature* creature)
     {
-        auto const& threatlist = creature->GetThreatMgr().GetThreatList();
+        auto threatlist = creature->GetThreatMgr().GetModifiableThreatList();
 
         lua_createtable(L, threatlist.size(), 0);
         int tbl = lua_gettop(L);
         uint32 i = 0;
         for (auto itr = threatlist.begin(); itr != threatlist.end(); ++itr)
         {
-            Unit* target = (*itr)->getTarget();
+            Unit* target = (*itr)->GetVictim();
 
             if (!target)
                 continue;

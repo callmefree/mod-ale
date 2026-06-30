@@ -1890,7 +1890,7 @@ namespace LuaUnit
         lua_newtable(L);
         int table = lua_gettop(L);
         uint32 i = 1;
-        for (ThreatReference* item : list)
+        for (ThreatReference const* item : list)
         {
             if (!item)
             {

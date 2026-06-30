@@ -1885,7 +1885,7 @@ namespace LuaUnit
             return 1;
         }
 
-        ThreatContainer::StorageType const& list = unit->GetThreatMgr().GetThreatList();
+        auto const& list = unit->GetThreatMgr().GetSortedThreatList();
 
         lua_newtable(L);
         int table = lua_gettop(L);
